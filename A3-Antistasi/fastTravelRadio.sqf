@@ -138,4 +138,4 @@ if (count _posicionTel > 0) then
 		Hint "You must click near marker under your control";
 		};
 	};
-openMap false;
+//openMap false;
