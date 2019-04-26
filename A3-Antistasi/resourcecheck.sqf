@@ -122,7 +122,6 @@ while {true} do
 	_members = [];                                                  //Variable with the intent of holding the members list
 	_dinero = 0;
 	_tax_available = round(_recAddSDK * _tax_percent);              //Break out the available tax
-	_recAddSDK = _recAddSDK - _tax_available;                       //Remove that value from the faction tax
 
 	if (membershipEnabled) then {{                                  //Figure out if membership is enabled
 	    if ([_x] call A3A_fnc_isMember) then {                      //Figure out if _x_player is a member
@@ -130,16 +129,25 @@ while {true} do
 				};
 	    }forEach _allHPs;                                           //Lets do this and find each member
 	};
-	_tax_per_member = _tax_available + count(_members);             //Set the tax payout
+	_membercount = count(_members);
 
-	if (membershipEnabled) then {{                                  //Figure out if membership is enabled
-	    _dinero = _tax_per_member + (_x getVariable "dinero");      //Lets add the Tax to the pile of Dinero
-	    if (_dinero < 0) then {_dinero = 0};                        //Check to see if its less than 0
-	    _x setVariable ["dinero",_dinero,true];                     //Set the magical dinero value to its new value
-	    //["dinero",_dinero] call fn_SaveStat;                        //Save this players Dineros!
-	    }forEach _members;                                          //For all the members please
+	if (_membercount > 0) then {					//Only make transfer if there are recipients (and avoid division by zero :))
+		_tax_per_member = round(_tax_available / _membercount);      //Set the tax payout
+		if (_tax_per_member > 0) then {				     //Don't trasfer debts to members (neg tax possible??)
+			_recAddSDK = _recAddSDK - (_tax_per_member * _membercount);  //Remove member transferd taxes from the faction tax
+		
+			if (membershipEnabled) then {{                                  //Figure out if membership is enabled
+			    _dinero = _tax_per_member + (_x getVariable "dinero");      //Lets add the Tax to the pile of Dinero
+			    // check for negative dineros removed... We don't forward depts
+			    // and don't give total absolution to tax recipients ;-)
+			    //if (_dinero < 0) then {_dinero = 0};                        //Check to see if its less than 0
+			    _x setVariable ["dinero",_dinero,true];                     //Set the magical dinero value to its new value
+			    //["dinero",_dinero] call fn_SaveStat;                        //Save this players Dineros!
+			    }forEach _members;                                          //For all the members please
+			};
+			[] spawn A3A_fnc_statistics;                                    //Lets update the player information
+		};
 	};
-	[] spawn A3A_fnc_statistics;                                    //Lets update the player information
 
 	_texto = format ["<t size='0.6' color='#C1C0BB'>Taxes Income.<br/> <t size='0.5' color='#C1C0BB'><br/>Manpower: +%1<br/>Money: +%2 €",_hrAddBLUFOR,_recAddSDK];
 	[] call A3A_fnc_FIAradio;
