@@ -511,14 +511,16 @@ timer setVariable [vehNATOMRLS,0,true];
 timer setVariable [vehCSATMRLS,5,true];
 
 
-server setVariable [civCar,200,true];//200
+server setVariable [civCar,150,true];//200
 server setVariable [civTruck,600,true];//600
 server setVariable [civHeli,5000,true];//5000
 server setVariable [civBoat,200,true];//200
-server setVariable [vehSDKBike,50,true];//50
-server setVariable [vehSDKLightUnarmed,200,true];//200
-server setVariable [vehSDKTruck,300,true];//300
-{server setVariable [_x,700,true]} forEach [vehSDKLightArmed,vehSDKAT];
+server setVariable [vehSDKBike,2000,true];//Vodnik
+server setVariable [vehSDKLightUnarmed,6000,true];//T34
+server setVariable [vehSDKTruck,9000,true];//T55
+server setVariable [vehSDKLightArmed,4000,true];//Hilux
+{server setVariable [_x,700,true]} forEach [vehSDKAT];
+//{server setVariable [_x,700,true]} forEach [vehSDKLightArmed,vehSDKAT];
 {server setVariable [_x,400,true]} forEach [SDKMGStatic,vehSDKBoat,vehSDKRepair];//400
 {server setVariable [_x,800,true]} forEach [SDKMortar,staticATBuenos,staticAABuenos];//800
 server setVariable ["hr",8,true];//initial HR value
