@@ -17,11 +17,11 @@ SDKMil = ["rhsgref_nat_militiaman_kar98k","rhsgref_nat_rifleman_akms"];
 SDKSL = ["rhsgref_nat_pmil_commander","rhsgref_nat_commander"];
 SDKEng = ["rhsgref_ins_g_engineer","rhsgref_cdf_ngd_engineer"];
 
-vehSDKBike = "I_G_Quadbike_01_F";
-vehSDKLightArmed = "rhsgref_ins_g_uaz_dshkm_chdkz";
+vehSDKBike = "UK3CB_TKA_I_GAZ_Vodnik_KVPT";
+vehSDKLightArmed = "UK3CB_TKM_I_Hilux_Rocket_Arty";
 vehSDKAT = "rhsgref_nat_uaz_spg9";
-vehSDKLightUnarmed = "rhsgref_cdf_reg_uaz_open";
-vehSDKTruck = "rhsgref_nat_ural_open";
+vehSDKLightUnarmed = "UK3CB_I_G_T34";
+vehSDKTruck = "UK3CB_I_G_T55";
 //vehSDKHeli = "rhsgref_ins_g_Mi8amt";
 vehSDKPlane = "RHS_AN2";
 vehSDKBoat = "I_C_Boat_Transport_01_F";
